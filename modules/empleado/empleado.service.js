@@ -9,7 +9,7 @@ class QueryEmpleado extends EmpleadoServiceDb{
     super()
   }
 
-  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email) {
+  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email){
     try {
         const response = await super.crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email)
         if(!response){

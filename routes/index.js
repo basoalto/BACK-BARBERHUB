@@ -7,7 +7,7 @@ const servicio = require('../modules/servicio/servicio.router')
 const empleado_turno = require('../modules/empleado_turno/empleado_turno.router')
 const cita = require('../modules/cita/cita.router')
 const cors = require('cors');
-
+const empleado_servicio = require('../modules/./empleado_servicio/empleado_servicio.router')
 function routerApi(app){
   const router = express.Router();
   app.use(cors());
@@ -18,6 +18,7 @@ function routerApi(app){
   router.use('/cliente', cliente)
   router.use('/servicio', servicio)
   router.use('/cita', cita)
+  router.use('/empleado_servicio', empleado_servicio)
 }
 
 module.exports = routerApi;

@@ -24,7 +24,7 @@ class Empleado_TurnoService extends DbConfig {
   async obtenerTurnoPorId(idEmpleado) {
     try {
       console.log('id',idEmpleado)
-      const result = await this.pool.query('SELECT * FROM peluqueria.empleado_turno WHERE "EmpleadoID" = $1', [idEmpleado]);
+      const result = await this.pool.query('SELECT * FROM peluqueria.empleado_turno WHERE "empleado_turnoID" = $1', [idEmpleado]);
       if (result.rows.length > 0) {
         return result.rows;
       } else {
