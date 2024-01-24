@@ -33,10 +33,9 @@ class QueryEmpleado extends EmpleadoServiceDb{
 
   async eliminarEmpleado(empleadoId, email) {
     try {
-      const response = super.eliminarEmpleado(empleadoId)
-      console.log(response)
-      const userRecord = firebaseService.getUserByEmail(email)
-      const reponse = await deleteUser(userRecord);
+      const reponse = await firebaseService.deleteByEmail(email)
+      const responsedb = await super.eliminarEmpleado(empleadoId)
+      console.log(responsedb)
       return {message: reponse}
     } catch (error) {
       throw new Error('Error al eliminar empleado: ' + error.message);

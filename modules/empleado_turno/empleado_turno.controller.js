@@ -7,7 +7,7 @@ const service = new Empleado_TurnoService();
 const crearEmpleado_turno = async (req, res) => {
   try {
     const { EmpleadoID, Fecha, HoraEntrada, HoraSalida, Nombre} = req.body;
-    console.log(EmpleadoID)
+    console.log(Nombre)
     const response =  await service.crearEmpleado_turno(EmpleadoID, Fecha, HoraEntrada, HoraSalida, Nombre)
     res.status(201).json({ response });
   } catch (error) {

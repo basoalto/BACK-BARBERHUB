@@ -10,10 +10,8 @@ class Empleado_TurnoService extends DbConfig {
 
   async crearEmpleado_turno(p_idEmpleado, p_Fecha, p_HoraEntrada, p_HoraSalida, p_nombre) {
     try {
-      const fechaFormateada = this.pool.query(`SELECT to_date('${p_Fecha}', 'YYYY-MM-DD') as fecha_formateada`);
-      const fecha = fechaFormateada.rows[0].fecha_formateada;
       const result = await this.pool.query(
-        `SELECT peluqueria.crear_empleado_turno(${p_idEmpleado}, '${fecha}', '${p_HoraEntrada}', '${p_HoraSalida}','${p_nombre}') as nuevo_turno_id`
+        `SELECT peluqueria.crear_empleado_turno(${p_idEmpleado}, '${p_Fecha}', '${p_HoraEntrada}', '${p_HoraSalida}','${p_nombre}') as nuevo_turno_id`
         );
       console.log(result)
       return result.rows[0]

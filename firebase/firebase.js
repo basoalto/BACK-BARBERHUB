@@ -1,7 +1,7 @@
 const { extend } = require('joi');
 const authAdmin = require('./config');
 const FirebaseConfig = require('./config')
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, deleteUser } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, deleteUser,  getUserByEmail } = require("firebase/auth");
 
 
 class FirebaseService extends FirebaseConfig {
@@ -10,28 +10,17 @@ class FirebaseService extends FirebaseConfig {
     this.initializeApp()
     this.auth = getAuth(this.app);
   }
-  signIn(email, password) {
+  async signIn(email, password) {
     console.log('auth',this.auth)
-    return signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        console.log(`${userCredential.user.email} ha iniciado sesión`)
-        return true
-      })
-      .catch((error) => {
-        console.log('Intento fallido de inicio de sesion', error)
-        return false
-      });
-  }
-  getUserByEmail = async () => {
     try {
-
-      const userRecord = this.auth.currentUser
-      return userRecord;
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      console.log(`${userCredential.user.email} ha iniciado sesión`);
+      return true;
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      return null;
+      console.log('Intento fallido de inicio de sesion', error);
+      return false;
     }
-  };
+  }
 
   register = async (email, password) => {
     return createUserWithEmailAndPassword(this.auth, email, password)
@@ -46,13 +35,16 @@ class FirebaseService extends FirebaseConfig {
       return false;
     }
   }
+
   deleteByEmail = async (email) => {
     try {
       // Buscar el usuario por email
-      const user = await getUserByEmail(email);
-      await this.auth.deleteUser(user.uid);
-
-      console.log(`Usuario con email ${email} eliminado con éxito.`);
+      const userRecord = this.auth.currentUser
+      const userByEmail = await getUserByEmail(this.auth, email)
+      console.log("userByEmail",userByEmail)
+      const response =await deleteUser(userRecord);
+      console.log(response)
+      console.log(`Usuario con email ${response} eliminado con éxito.`);
       return true;
     } catch (error) {
       console.error('Error al intentar eliminar el usuario:', error);

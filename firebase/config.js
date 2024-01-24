@@ -1,5 +1,4 @@
 const { initializeApp } = require("firebase/app");
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, deleteUser } = require("firebase/auth");
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -35,10 +34,6 @@ class FirebaseConfig {
   initializeApp() {
     this.app =  initializeApp(this.config());
   }
-  get(){
-
-  }
-
 }
 
 module.exports = FirebaseConfig;
