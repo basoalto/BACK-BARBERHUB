@@ -24,7 +24,7 @@ class Empleado_TurnoService extends DbConfig {
   async obtenerTurnoPorId(idEmpleado) {
     try {
       console.log('id',idEmpleado)
-      const result = await this.pool.query('SELECT * FROM peluqueria.empleado_turno WHERE "empleado_turnoID" = $1', [idEmpleado]);
+      const result = await this.pool.query('SELECT * FROM peluqueria.empleado_turno WHERE "EmpleadoID" = $1', [idEmpleado]);
       if (result.rows.length > 0) {
         return result.rows;
       } else {
@@ -45,6 +45,25 @@ class Empleado_TurnoService extends DbConfig {
       throw new Error('Error al actualizar empleado: ' + error.message);
     }
   }
+  async deleteEmpleadoTurno(p_empleadoTurno_id) {
+    try {
+      const result = await this.pool.query(
+        `DELETE FROM peluqueria.empleado_turno WHERE empleado_turnoid = $1 RETURNING empleado_turnoid;`,
+        [p_empleadoTurno_id]
+      );
+      if(result.rows.length > 0){
+        console.log(result.rows)
+        return { 'se elimino el turno del empleado': result.rows[0] };
+      }else{
+        console.log(result.rows)
+        return { message: 'No existe el id de turno'};
+      }
+
+    } catch (error) {
+      throw new Error('Error al eliminar empleado_turno: ' + error.message);
+    }
+  }
+
 }
 
 module.exports = Empleado_TurnoService;

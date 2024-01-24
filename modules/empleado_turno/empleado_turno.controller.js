@@ -38,5 +38,15 @@ const ActualizarTurnoPorIdEmpleado = async (req, res) => {
   }
 };
 
+const EliminarTurnoPorIdTurno = async (req, res) => {
+  try {
+    const { IdTurno  } = req.params;
+    const response = await service.deleteEmpleadoTurno(IdTurno);
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
-module.exports = {crearEmpleado_turno, obtenerturno, ActualizarTurnoPorIdEmpleado};
+
+module.exports = {crearEmpleado_turno, obtenerturno, ActualizarTurnoPorIdEmpleado, EliminarTurnoPorIdTurno};
