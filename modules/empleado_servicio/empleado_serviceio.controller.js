@@ -16,8 +16,17 @@ const crearEmpleado_Service = async (req, res) => {
   }
 }
 
+const obtenerEmpleado_Service = async (req, res) => {
+  try{
+    const { empleadoId } = req.params
+    console.log(empleadoId)
+    const response = await service.obtenerServicioEmpleado(empleadoId)
+    res.status(200).send(response)
+  }catch(error){
+    res.status(404).send("Bad Request")
+  }
+}
 
 
 
-
-module.exports = {crearEmpleado_Service}
+module.exports = {crearEmpleado_Service, obtenerEmpleado_Service}

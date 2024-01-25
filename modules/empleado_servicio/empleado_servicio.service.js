@@ -15,6 +15,15 @@ class EmpleadoServicio extends EmpleadoServicioDb{
     }
   }
 
+  async obtenerServicioEmpleado(empleadoId){
+    const response = await super.obtenerServicioPorIdEmpleado(empleadoId)
+    if(!response){
+      return {message: 'No existen servicios con este id empleado'}
+    }else{
+      return response
+    }
+  }
+
 }
 
 module.exports = EmpleadoServicio
