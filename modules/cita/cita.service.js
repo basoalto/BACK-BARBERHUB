@@ -1,15 +1,16 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 const DbConfig = require('../../DbConfig/DbConfig')
-
-
+const messageCreateDateTemplate = require('../mail/template/mail')
+const MailService = require('../mail/mail.service')
 class CitaService extends DbConfig {
 
   constructor(){
     super()
     this.pool =  new Pool(super.getConfig())
+    this.mailService = new MailService;
   }
-  async CrearCita(p_Fecha, p_HoraEntrada, p_HoraSalida, ImagenCorte, p_Estado, p_clienteID, p_empleadoID, p_servicioID) {
+  async CrearCita(p_Fecha, p_HoraEntrada, p_HoraSalida, ImagenCorte, p_Estado, p_clienteID, p_empleadoID, p_servicioID, p_email) {
     try {
       const p_ImagenCorte = Buffer.from(ImagenCorte, 'base64'); // Decodifica la cadena base64 a un buffer
       console.log(p_ImagenCorte);
@@ -31,13 +32,16 @@ class CitaService extends DbConfig {
       if (!result.rows[0]) {
         return { message: 'no se creo la cita' };
       }
+
+      const message = messageCreateDateTemplate(p_email, p_Fecha,`${p_HoraEntrada} a ${p_HoraSalida}`)
+      this.mailService.sendMail(message)
+      return true;
       return result.rows[0];
     } catch (error) {
       console.log(error);
       throw new Error('Error al crear empleao: ' + error.message);
     }
   }
-
 
   async obtenerCitaPorIdEmpleado(idEmpleado){
     try{

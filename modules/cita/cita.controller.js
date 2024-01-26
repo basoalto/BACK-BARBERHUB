@@ -4,7 +4,7 @@ const service = new CitaService();
 
 const crearCita = async (req, res) => {
   try {
-    const { p_Fecha, p_HoraEntrada, p_HoraSalida, p_Estado, p_clienteID,p_empleadoID, p_servicioID  } = req.body;
+    const { p_Fecha, p_HoraEntrada, p_HoraSalida, p_Estado, p_clienteID,p_empleadoID, p_servicioID, p_email  } = req.body;
     if (!req.file) {
       return res.status(400).send("No se proporcionó ninguna imagen");
     }
@@ -19,7 +19,8 @@ const crearCita = async (req, res) => {
       p_Estado,
       p_clienteID,
       p_empleadoID,
-      p_servicioID
+      p_servicioID,
+      p_email
     );
     res.status(200).send(response);
   } catch (error) {

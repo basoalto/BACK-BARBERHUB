@@ -8,6 +8,7 @@ const empleado_turno = require('../modules/empleado_turno/empleado_turno.router'
 const cita = require('../modules/cita/cita.router')
 const cors = require('cors');
 const empleado_servicio = require('../modules/./empleado_servicio/empleado_servicio.router')
+const sendEmail =  require('../modules/mail/mail.router')
 function routerApi(app){
   const router = express.Router();
   app.use(cors());
@@ -19,6 +20,7 @@ function routerApi(app){
   router.use('/servicio', servicio)
   router.use('/cita', cita)
   router.use('/empleado_servicio', empleado_servicio)
+  router.use('/sendEmail', sendEmail)
 }
 
 module.exports = routerApi;

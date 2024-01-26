@@ -42,7 +42,6 @@ router.post('/signin', async (req, res) => {
 });
 
 
-
 router.post('/resetpassword', async (req, res) => {
   try{
     const {correo} = req.body;
