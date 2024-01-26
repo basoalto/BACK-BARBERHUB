@@ -2,12 +2,16 @@ const express = require('express');
 const router = express.Router();
 const ClienteService = require('../cliente/cliente.service.js')
 const EmpleadoServiceDb = require('../../database/empleadoQuery.database')
-// const { auth, signInWithEmailAndPassword, sendPasswordResetEmail } = require('../../firebase/config');
+const obtenerAdmin = require('../../database/adminQuery.database.js')
 const FirebaseService = require('../../firebase/firebase')
 const {createJwt} = require('../../util/jwt.js')
+
+const adminService = new obtenerAdmin
 const clienteService = new ClienteService
 const empleadoServiceDb = new EmpleadoServiceDb
 const firebaseService = new FirebaseService
+
+
 router.post('/signin', async (req, res) => {
   try {
     const { correo, contrasena } = req.body;
@@ -17,17 +21,20 @@ router.post('/signin', async (req, res) => {
     console.log(userRecord);
     const cliente = await clienteService.obtenerClientePorEmail(correo);
     const empleado = await empleadoServiceDb.obtenerEmpleadoPorEmail(correo);
-
+    const admin = await adminService.obtenerAdmin(correo)
+    console.log(admin)
     if (cliente) {
       console.log(cliente);
       token = createJwt(cliente);
     } else if (empleado) {
       console.log(empleado);
       token = createJwt(empleado);
+    }else if (admin) {
+      console.log(admin);
+      token = createJwt(admin);
     }
     // Enviar el token JWT como respuesta al cliente
     res.status(200).json(token);
-    // res.status(200).json({ message: userRecord.user.uid });
   } catch (error) {
     console.error('Error signing in:', error);
     res.status(404).json({ error: 'No existe el usuario' });

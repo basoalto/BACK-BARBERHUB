@@ -61,5 +61,4 @@ class ClienteService extends DbConfig {
     }
   }
 }
-
 module.exports = ClienteService;

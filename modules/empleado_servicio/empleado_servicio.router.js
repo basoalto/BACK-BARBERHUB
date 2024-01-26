@@ -16,4 +16,5 @@ router.get('/:empleadoId', async (req, res) => {
   })
 })
 
+
 module.exports = router;

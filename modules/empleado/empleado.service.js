@@ -9,9 +9,9 @@ class QueryEmpleado extends EmpleadoServiceDb{
     super()
   }
 
-  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email){
+  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, p_estado){
     try {
-        const response = await super.crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email)
+        const response = await super.crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, p_estado)
         if(!response){
           return {message: 'ya existe el empleado'}
         }else{
@@ -27,8 +27,8 @@ class QueryEmpleado extends EmpleadoServiceDb{
     return super.obtenerEmpleados()
   }
 
-  async actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email) {
-    return super.actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email)
+  async actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email, p_estado) {
+    return super.actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id + 'r', p_email, p_estado)
   }
 
   async eliminarEmpleado(empleadoId, email) {

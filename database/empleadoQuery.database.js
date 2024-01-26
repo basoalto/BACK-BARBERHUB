@@ -6,16 +6,16 @@ class EmpleadoServiceDb extends DbConfig {
     this.pool = new Pool(super.getConfig())
   }
 
-  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email) {
+  async crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, p_estado) {
     try {
-      console.log(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email)
+      console.log(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, p_estado)
       const existeEmpleado = await this.obtenerEmpleadoPorEmail(p_email)
       if (existeEmpleado) {
         console.log('empleado ya existe')
         return false
       } else {
         const result = await this.pool.query(
-          `SELECT peluqueria.crear_empleado('${p_nombre}', '${p_apellido}', '${p_especialidad}', '${p_rol_id}', '${p_email}') as nuevo_empleado_id`
+          `SELECT peluqueria.crear_empleado('${p_nombre}', '${p_apellido}', '${p_especialidad}', '${p_rol_id}', '${p_email}', '${p_estado}') as nuevo_empleado_id`
         );
         return result.rows[0]
       }
@@ -25,9 +25,10 @@ class EmpleadoServiceDb extends DbConfig {
   }
   async obtenerEmpleadoPorEmail(email) {
     try {
-      const result = await this.pool.query('SELECT * FROM peluqueria.empleado WHERE "email" = $1', [email]);
+      const result = await this.pool.query(
+        'SELECT * FROM peluqueria.empleado WHERE "email" = $1', [email]);
       if (result.rows.length > 0) {
-        return result.rows[0];
+        return result.rows[0]
       } else {
         return false;
       }
@@ -48,12 +49,12 @@ class EmpleadoServiceDb extends DbConfig {
     }
   }
 
-  async actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email) {
+  async actualizarEmpleado(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email, p_estado) {
     try {
-      console.log(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email)
+      console.log(p_empleado_id, p_nombre, p_apellido, p_especialidad, p_rol_id, p_email, p_estado)
       const result = await this.pool.query(
-        `SELECT peluqueria.actualizar_empleado('${p_empleado_id}','${p_nombre}','${p_apellido}', '${p_especialidad}', '${p_rol_id}','${p_email}') as empleado_id_actualizado`
-      );
+        `SELECT peluqueria.actualizar_empleado(${p_empleado_id},'${p_nombre}','${p_apellido}', '${p_especialidad}', ${parseInt(p_rol_id)},'${p_email}', ${p_estado}) as empleado_id_actualizado`
+        );
       return { 'se actualizo el empleado': result.rows[0] }
     } catch (error) {
       throw new Error('Error al actualizar empleado: ' + error.message);

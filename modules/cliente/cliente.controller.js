@@ -14,7 +14,15 @@ const crearCliente = async (req, res) => {
   }
 }
 
+const obtenerClientes = async (req, res) =>{
+  try{
+    const response = await service.obtenerClientes()
+    res.status(200).send(response)
+  }catch(error){
+    console.log(error)
+    res.status(404).send("Bad Request")
+  }
+}
 
 
-
-module.exports = crearCliente
+module.exports = {crearCliente, obtenerClientes}

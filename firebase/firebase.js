@@ -35,12 +35,12 @@ class FirebaseService extends FirebaseConfig {
       return false;
     }
   }
-
   deleteByEmail = async (email) => {
     try {
       // Buscar el usuario por email
+      console.log(email)
       const userRecord = this.auth.currentUser
-      const userByEmail = await getUserByEmail(this.auth, email)
+      const userByEmail = await getUserByEmail(email)
       console.log("userByEmail",userByEmail)
       const response =await deleteUser(userRecord);
       console.log(response)
