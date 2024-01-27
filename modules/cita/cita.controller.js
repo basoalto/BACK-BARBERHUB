@@ -38,5 +38,24 @@ const obtenerCitaPorIdEmpleado = async (req, res) => {
     res.status(404).send("Bad Request")
   }
 }
+const actualizarCitaPoridCita = async (req, res) =>{
+  try{
+    const {p_idCita } =  req.params
+    const {
+      p_Fecha= "1800-01-01",
+      p_HoraInicio= '00:00:00',
+      p_HoraFin= '00:00:00',
+      p_Estado= '',
+      p_ClienteID= 0,
+      p_EmpleadoID= 0,
+      p_ServicioID = 0
+     } = req.body
+    const response = await service.actualizarCita(p_idCita,p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado )
+    res.status(200).send(response)
+  }catch(error){
+    console.log(error)
+    res.status(404).send('Bad Request')
+  }
+}
 
-module.exports = { crearCita, obtenerCitaPorIdEmpleado };
+module.exports = { crearCita, obtenerCitaPorIdEmpleado, actualizarCitaPoridCita };

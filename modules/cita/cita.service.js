@@ -34,7 +34,8 @@ class CitaService extends DbConfig {
       }
 
       const message = messageCreateDateTemplate(p_email, p_Fecha,`${p_HoraEntrada} a ${p_HoraSalida}`)
-      this.mailService.sendMail(message)
+      const responseEmail = this.mailService.sendMail(message)
+      console.log(responseEmail)
       return true;
       return result.rows[0];
     } catch (error) {
@@ -56,7 +57,21 @@ class CitaService extends DbConfig {
     }
   }
 
-
+  async actualizarCita(p_idCita,p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado){
+    try{
+      console.log(p_idCita,p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado)
+      const result = await this.pool.query(`SELECT peluqueria.actualizar_cita(${p_idCita},'${p_Fecha}','${p_HoraInicio}','${p_HoraFin}',${p_ClienteID},${p_EmpleadoID},${p_ServicioID},'${p_Estado}') as cita_id_actualizado`)
+      if(result.rows.length > 0){
+        console.log(result.rows.length)
+        return result.rows[0]
+      }else{
+        return false
+      }
+    }catch(error){
+      console.log(error)
+      throw new Error("error al actualizar cita", error.message)
+    }
+  }
 }
 
 

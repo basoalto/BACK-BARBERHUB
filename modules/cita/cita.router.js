@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { crearCita, obtenerCitaPorIdEmpleado } = require('./cita.controller');
+const { crearCita, obtenerCitaPorIdEmpleado, actualizarCitaPoridCita } = require('./cita.controller');
 const multer = require('multer');
 
 // Configuración del middleware de carga de archivos con Multer
@@ -22,6 +22,15 @@ router.get('/:idEmpleado', (req, res) => {
   .catch((error) => {
     console.log(error)
     res.status(500).send('Error Server')
+  })
+})
+
+
+router.patch('/:p_idCita', (req, res) => {
+  actualizarCitaPoridCita(req, res)
+  .catch((error) => {
+    console.log(error)
+    res.status(500).send('Server Error')
   })
 })
 

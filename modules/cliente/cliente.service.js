@@ -60,5 +60,19 @@ class ClienteService extends DbConfig {
       throw new Error('error al crear cliente' + error.message);
     }
   }
+
+  async actualizarCliente(p_cliente_id, p_nombre, p_apellido,p_telefono, p_email, p_rol, p_estado){
+    try{
+      console.log(p_cliente_id)
+      const result = await this.pool.query(`SELECT peluqueria.actualizar_cliente(${p_cliente_id}, '${p_nombre}', '${p_apellido}', '${p_telefono}','${p_email}', ${p_rol}, ${p_estado}) as clienteactualizado`)
+      if(result.rows.length > 0){
+        return result.rows[0]
+      }else{
+        return {message: 'cliente no existe'}
+      }
+    }catch(error){
+      throw new Error("error al crear cliente" + error.message)
+    }
+  }
 }
 module.exports = ClienteService;
