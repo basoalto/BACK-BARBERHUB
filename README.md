@@ -50,15 +50,22 @@ Rutas Específicas de Entidades:
 
 /api/v1/empleado
  - Endpoint para operaciones relacionadas con empleados.
+   
 /api/v1/empleado_turno
  - Endpoint para operaciones relacionadas con turnos de empleados.
+
 /api/v1/cliente
  - Endpoint para operaciones relacionadas con clientes.
+   
 /api/v1/servicio
  - Endpoint para operaciones relacionadas con servicios de barbería.
+   
 /api/v1/cita
  - Endpoint para operaciones relacionadas con citas en la barbería.
+   
 /api/v1/empleado_servicio
  - Endpoint para operaciones relacionadas con la asignación de servicios a empleados.
+   
 /api/v1/sendEmail
  - Endpoint para el envío de correos electrónicos.
+   
