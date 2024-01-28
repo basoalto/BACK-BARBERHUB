@@ -6,9 +6,8 @@ const empleadoService = new EmpleadoService();
 
 const crearEmpleado = async (req, res) => {
   try {
-    const { p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email} = req.body;
-    const estado = true
-    const response =  await empleadoService.crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, estado)
+    const { p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email,  p_estado} = req.body;
+    const response =  await empleadoService.crearEmpleado(p_nombre, p_apellido, p_especialidad, p_rol_id, p_contrasena, p_email, p_estado)
     res.status(200).json({ response });
   } catch (error) {
     res.status(500).json({ error: error.message });
