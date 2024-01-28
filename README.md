@@ -2,10 +2,12 @@ BarberHub API
 Este proyecto consiste en un backend para la gestión de citas y servicios de una barbería. 
 Está construido utilizando Express.js y sigue una arquitectura REST. A continuación, 
 se proporcionan instrucciones para iniciar el proyecto y detalles sobre los endpoints disponibles.
+
 -------------------------------
 Inicio Rápido
 Instala las dependencias:
 npm install
+
 --------------------------------
 Configura las variables de entorno creando un archivo .env en la raíz del proyecto. 
 Asegúrate de incluir las siguientes variables:
@@ -37,16 +39,19 @@ PG_SSL_REJECT_UNAUTHORIZED=false
 MAILER_USER=vetsflyfly@gmail.com
 MAILER_PASSWORD=yvtx lzho tzdk umkf
 MAILER_HOST=smtp.gmail.com
+
 --------------------------------
 Corre el proyecto en modo de desarrollo:
-npm run dev
+npm run 
+
 --------------------------------
+#Endpoints
 POST/api/v1/auth
   Requiere un objeto JSON en el cuerpo de la solicitud con las propiedades email y password. 
   Asegúrate de encriptar esta información utilizando AES, utilizando la misma clave y vector que en el frontend. 
   Retorna un JWT con la información del usuario para autorizar otros endpoints.
   
-Rutas Específicas de Entidades:
+#Rutas Específicas de Entidades:
 
 /api/v1/empleado
  - Endpoint para operaciones relacionadas con empleados.
