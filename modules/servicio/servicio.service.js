@@ -21,5 +21,17 @@ class ServicioService extends DbConfig{
     }
   }
 
+  async obtenerServicioPorIdservicio (servicioID) {
+    try{
+      const result = await this.pool.query('SELECT * FROM peluqueria.servicio WHERE ServicioID = $1', [servicioID])
+      if(!result.rows[0]){
+        return {message: 'no existen servicios'}
+      }
+      return result.rows
+    }catch(error){
+      throw new Error('Error al obtener empleado: ' + error.message);
+    }
+  }
+
 }
 module.exports = ServicioService;

@@ -10,8 +10,19 @@ const obtenerServicios = async (req, res) => {
     console.log(error)
     res.status(404).send('Bad Request')
   }
+}
 
+const obtenerServiciosPorIdServicio = async (req, res)=> {
+  try{
+    const {idServicio } = req.params
+    const response = await service.obtenerServicioPorIdservicio(idServicio)
+    res.status(200).send(response)
+  }catch(error){
+    res.status(404).send('Bad Request')
+  }
 }
 
 
-module.exports = obtenerServicios
+
+
+module.exports = {obtenerServicios, obtenerServiciosPorIdServicio}
