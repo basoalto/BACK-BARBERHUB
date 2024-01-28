@@ -9,7 +9,7 @@ class EmpleadoServicioDb extends DbConfig {
     try{
       const responseIdServicio = await this.obtenerPorIdServicioYIdEmpleado(p_empleadoID, p_servicioID)
       console.log(responseIdServicio)
-      if(!responseIdServicio){
+      if(responseIdServicio){
         return false
       }
       console.log(p_empleadoID, p_servicioID)
@@ -24,9 +24,9 @@ class EmpleadoServicioDb extends DbConfig {
     try{
       const result = await this.pool.query('SELECT * FROM peluqueria.empleado_servicio WHERE "ServicioID" = $1 AND "EmpleadoID" = $2', [idServicio, p_empleadoID]);
       if(result.rows.length > 0){
-        return false
-      }else{
         return result.rows[0]
+      }else{
+        return false
       }
     }catch(error){
       throw new Error('no se pudo obtener el Empleado_servicio por id', error)
