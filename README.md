@@ -39,7 +39,7 @@ MAILER_PASSWORD=yvtx lzho tzdk umkf
 MAILER_HOST=smtp.gmail.com
 --------------------------------
 Corre el proyecto en modo de desarrollo:
-npm run dev1
+npm run dev
 --------------------------------
 POST/api/v1/auth
   Requiere un objeto JSON en el cuerpo de la solicitud con las propiedades email y password. 
