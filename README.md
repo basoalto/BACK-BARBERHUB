@@ -1,4 +1,4 @@
-BarberHub API
+# BarberHub API
 Este proyecto consiste en un backend para la gestión de citas y servicios de una barbería. 
 Está construido utilizando Express.js y sigue una arquitectura REST. A continuación, 
 se proporcionan instrucciones para iniciar el proyecto y detalles sobre los endpoints disponibles.
