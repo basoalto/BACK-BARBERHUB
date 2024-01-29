@@ -13,15 +13,22 @@ Configura las variables de entorno creando un archivo .env en la raíz del proye
 Asegúrate de incluir las siguientes variables:
 # Firebase
 FIREBASE_API_KEY=AIzaSyCB9-hDbfuLOuUZfA488HRUo715fvRPYWY
+
 FIREBASE_AUTH_DOMAIN=barberhub-dae45.firebaseapp.com
+
 FIREBASE_PROJECT_ID=barberhub-dae45
+
 FIREBASE_STORAGE_BUCKET=barberhub-dae45.appspot.com
+
 FIREBASE_MESSAGING_SENDER_ID=1041270949233
+
 FIREBASE_APP_ID=1:1041270949233:web:874e038d21c5392357e2d0
+
 FIREBASE_MEASUREMENT_ID=G-NR1ZM9SY7C
 
 # Crypto-js
 CRYPTO_KEYCHAIN=df6147b10517f518d4ef7631e34117dc13d7bd5fadc7b75c5f8efa4ca40ea356
+
 CRYPTO_IVCHAIN=ed29dd55c39d48e95dab69bb26584f86
 
 # JWT
@@ -29,10 +36,15 @@ JWT_SECRET=b68ed87fe43cf0dbb17f0da5c3070fe6336d2ad394f1eb1ae58fe3db38d8fc1c
 
 # PostgreSQL
 PG_USER=fl0user
+
 PG_HOST=ep-lucky-silence-99345788.ap-southeast-1.aws.neon.fl0.io
+
 PG_DATABASE=peluqueria
+
 PG_PASSWORD=jW4sAptbyn2L
+
 PG_PORT=5432
+
 PG_SSL_REJECT_UNAUTHORIZED=false
 
 # Mailer
