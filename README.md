@@ -42,7 +42,7 @@ MAILER_HOST=smtp.gmail.com
 
 --------------------------------
 Corre el proyecto en modo de desarrollo:
-npm run 
+npm run dev
 
 --------------------------------
 # Endpoints
@@ -75,3 +75,5 @@ POST/api/v1/auth
 /api/v1/sendEmail
  - Endpoint para el envío de correos electrónicos.
    
+# URL Server en Producción
+https://cloudback-barber.onrender.com
