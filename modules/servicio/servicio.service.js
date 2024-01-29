@@ -1,35 +1,26 @@
 const { Pool } = require('pg');
-const { auth, createUserWithEmailAndPassword, getUserByEmail, deleteUser } = require('../../firebase/config');
 require('dotenv').config();
-const DbConfig = require('../../DbConfig/DbConfig')
-
-class ServicioService extends DbConfig{
+const ServicioServiceDB = require('../../database/servicioQuery.database')
+class ServicioService extends ServicioServiceDB{
   constructor(){
     super()
-    this.pool = new Pool(super.getConfig())
   }
 
   async obtenerServicios () {
     try{
-      const result = await this.pool.query('SELECT * FROM peluqueria.servicio')
-      if(!result.rows[0]){
-        return {message: 'no existen servicios'}
-      }
-      return result.rows
+      const response = super.obtenerServicios()
+      return response
     }catch(error){
-      throw new Error('Error al obtener empleado: ' + error.message);
+      throw new Error('Error al obtener servicios: ' + error.message);
     }
   }
 
   async obtenerServicioPorIdservicio (servicioID) {
     try{
-      const result = await this.pool.query('SELECT * FROM peluqueria.servicio WHERE "ServicioID" = $1', [servicioID])
-      if(!result.rows[0]){
-        return {message: 'no existen servicios'}
-      }
-      return result.rows[0]
+      const response = super.obtenerServicioPorIdservicio(servicioID)
+      return response
     }catch(error){
-      throw new Error('Error al obtener empleado: ' + error.message);
+      throw new Error('Error al obtener servicio: ' + error.message);
     }
   }
 

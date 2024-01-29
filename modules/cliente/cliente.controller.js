@@ -41,6 +41,9 @@ const actualizarCliente = async (req, res) => {
         p_rol= 1,
         p_estado= null} = req.body
     const response = await service.actualizarCliente(p_clienteid, p_nombre, p_apellido,p_telefono, p_email, p_rol, p_estado)
+    if(!response){
+      res.status(404).send("Cliente no existe")
+    }
     res.status(200).send(response)
   }catch(error){
     console.log(error)

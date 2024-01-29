@@ -11,10 +11,9 @@ class FirebaseService extends FirebaseConfig {
     this.auth = getAuth(this.app);
   }
   async signIn(email, password) {
-    console.log('auth',this.auth)
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-      console.log(`${userCredential.user.email} ha iniciado sesión`);
+      console.log(`${userCredential.user.uid} ha iniciado sesión`);
       return true;
     } catch (error) {
       console.log('Intento fallido de inicio de sesion', error);
