@@ -77,3 +77,5 @@ POST/api/v1/auth
    
 # URL Server en Producción
 https://cloudback-barber.onrender.com
+# URL Server en Local
+http://localhost:3000
