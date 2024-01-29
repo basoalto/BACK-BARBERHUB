@@ -62,6 +62,7 @@ npm run dev
 # Endpoints
 
 POST/api/v1/auth
+
   Requiere un objeto JSON en el cuerpo de la solicitud con las propiedades email y password. 
   Asegúrate de encriptar esta información utilizando AES, utilizando la misma clave y vector que en el frontend. 
   Retorna un JWT con la información del usuario para autorizar otros endpoints.
