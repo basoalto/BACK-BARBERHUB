@@ -37,7 +37,9 @@ PG_SSL_REJECT_UNAUTHORIZED=false
 
 # Mailer
 MAILER_USER=vetsflyfly@gmail.com
+
 MAILER_PASSWORD=yvtx lzho tzdk umkf
+
 MAILER_HOST=smtp.gmail.com
 
 --------------------------------
