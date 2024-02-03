@@ -12,7 +12,8 @@ const crearCliente = async (req, res) => {
       p_telefono,
       p_email,
       p_rol_id } = req.body;
-    const response = await service.crearCliente(contrasena, p_nombre, p_apellido, p_telefono, p_email, p_rol_id)
+    const p_estado = true
+    const response = await service.crearCliente(contrasena, p_nombre, p_apellido, p_telefono, p_email, p_rol_id, p_estado)
     console.log(response)
     res.status(200).send(response)
   }catch(error){

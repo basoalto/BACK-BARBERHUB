@@ -10,9 +10,9 @@ class ClienteService extends ClienteServiceDB {
     super()
   }
 
-  async crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id) {
+  async crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id, p_estado) {
     try {
-        const response = super.crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id)
+        const response = super.crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id, p_estado)
         return response
       }catch (error) {
       console.log(error)

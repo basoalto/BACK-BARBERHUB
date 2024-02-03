@@ -10,7 +10,7 @@ class ClienteServiceDB extends DbConfig {
     this.pool = new Pool(super.getConfig())
   }
 
-  async crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id) {
+  async crearCliente(contrasena, p_nombre, p_apellido, p_telefono,p_email, p_rol_id, p_estado) {
     try {
       console.log('rol', p_rol_id)
       const responseEmailCliente = await this.obtenerClientePorEmail(p_email)
@@ -20,7 +20,7 @@ class ClienteServiceDB extends DbConfig {
       }else{
         // Crear cliente en la base de datos
         const result = await this.pool.query(
-          `SELECT peluqueria.crear_cliente('${p_nombre}', '${p_apellido}', '${p_telefono}', '${p_email}', '${p_rol_id}') as nuevo_cliente_id`);
+          `SELECT peluqueria.crear_cliente('${p_nombre}', '${p_apellido}', '${p_telefono}', '${p_email}', '${p_rol_id}', '${p_estado}') as nuevo_cliente_id`);
         console.log('Response from crearCliente:', responseEmailCliente);
         const userRecord = await firebaseService.register(p_email, contrasena);
         return userRecord.user.uid

@@ -20,11 +20,10 @@ class AuthService {
   async singIn(correo, contrasena){
     let token = '';
     const userRecord = await firebaseService.signIn(correo, contrasena);
-    console.log(userRecord);
     const cliente = await clienteService.obtenerClientePorEmail(correo);
     const empleado = await empleadoServiceDb.obtenerEmpleadoPorEmail(correo);
     const admin = await adminService.obtenerAdmin(correo)
-
+    console.log(userRecord, 'estado cliente',cliente.Estado)
     if (userRecord && cliente.Estado == true) {
       token = createJwt(cliente);
       return token
