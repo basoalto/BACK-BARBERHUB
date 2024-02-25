@@ -5,9 +5,9 @@ const messageCreateDateTemplate = require('../mail/template/mail')
 const MailService = require('../mail/mail.service')
 class CitaService extends DbConfig {
 
-  constructor(){
+  constructor() {
     super()
-    this.pool =  new Pool(super.getConfig())
+    this.pool = new Pool(super.getConfig())
     this.mailService = new MailService;
   }
   async CrearCita(p_Fecha, p_HoraEntrada, p_HoraSalida, ImagenCorte, p_Estado, p_clienteID, p_empleadoID, p_servicioID, p_email) {
@@ -33,7 +33,7 @@ class CitaService extends DbConfig {
         return { message: 'no se creo la cita' };
       }
 
-      const message = messageCreateDateTemplate(p_email, p_Fecha,`${p_HoraEntrada} a ${p_HoraSalida}`)
+      const message = messageCreateDateTemplate(p_email, p_Fecha, `${p_HoraEntrada} a ${p_HoraSalida}`)
       const responseEmail = this.mailService.sendMail(message)
       console.log(responseEmail)
       return true;
@@ -44,30 +44,44 @@ class CitaService extends DbConfig {
     }
   }
 
-  async obtenerCitaPorIdEmpleado(idEmpleado){
-    try{
+  async obtenerCitaPorIdEmpleado(idEmpleado) {
+    try {
       const result = await this.pool.query('SELECT * FROM peluqueria.cita WHERE "EmpleadoID" = $1', [idEmpleado])
-      if(!result.rows[0]){
-        return {message: 'No existe empleado con ese id'}
-      }else{
+      if (!result.rows[0]) {
+        return { message: 'No existe empleado con ese id' }
+      } else {
         return result.rows
       }
-    }catch(error){
+    } catch (error) {
+      throw new Error('Error al obtener empleado' + error.message)
+    }
+  }
+  async obtenerCitas() {
+    try {
+      const result = await this.pool.query('SELECT * FROM peluqueria.cita')
+      if (!result.rows) {
+        console.log('no existen citas')
+        return { message: 'No existen citas' }
+      } else {
+        console.log('existen citas', result.rows)
+        return result.rows
+      }
+    } catch (error) {
       throw new Error('Error al obtener empleado' + error.message)
     }
   }
 
-  async actualizarCita(p_idCita,p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado){
-    try{
-      console.log(p_idCita,p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado)
+  async actualizarCita(p_idCita, p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado) {
+    try {
+      console.log(p_idCita, p_Fecha, p_HoraInicio, p_HoraFin, p_ClienteID, p_EmpleadoID, p_ServicioID, p_Estado)
       const result = await this.pool.query(`SELECT peluqueria.actualizar_cita(${p_idCita},'${p_Fecha}','${p_HoraInicio}','${p_HoraFin}',${p_ClienteID},${p_EmpleadoID},${p_ServicioID},'${p_Estado}') as cita_id_actualizado`)
-      if(result.rows.length > 0){
+      if (result.rows.length > 0) {
         console.log(result.rows.length)
         return result.rows[0]
-      }else{
+      } else {
         return false
       }
-    }catch(error){
+    } catch (error) {
       console.log(error)
       throw new Error("error al actualizar cita", error.message)
     }
