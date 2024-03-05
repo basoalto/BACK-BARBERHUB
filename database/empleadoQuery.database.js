@@ -15,11 +15,12 @@ class EmpleadoServiceDb extends DbConfig {
         return false
       } else {
         const result = await this.pool.query(
-          `SELECT peluqueria.crear_empleado('${p_nombre}', '${p_apellido}', '${p_especialidad}', '${p_rol_id}', '${p_email}', '${p_estado}') as nuevo_empleado_id`
+          `SELECT peluqueria.crear_empleado('${p_nombre}', '${p_apellido}', '${p_especialidad}', ${p_rol_id}, '${p_email}', ${p_estado}) as nuevo_empleado_id`
         );
         return result.rows[0]
       }
     } catch (error) {
+      console.log(error)
       throw new Error('Error al crear empleado: ' + error.message);
     }
   }
