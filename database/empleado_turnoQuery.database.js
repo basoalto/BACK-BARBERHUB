@@ -34,15 +34,15 @@ class empleadoTurnoDB extends DbConfig{
       throw new Error('Error al crear empleado: ' + error.message);
     }
   }
-  async actualizarEmpleado(p_empleado_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre) {
+  async actualizarEmpleado(p_turno_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre) {
     try {
-      console.log(p_empleado_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre)
+      console.log(p_turno_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre)
       const result = await this.pool.query(
-        `SELECT peluqueria.actualizar_empleado_turno(${p_empleado_id},'${p_fecha}','${p_hora_entrada}','${p_hora_salida}', '${p_nombre}') as empleado_turno_id_actualizado`
+        `SELECT peluqueria.actualizar_empleado_turno(${p_turno_id},'${p_fecha}','${p_hora_entrada}','${p_hora_salida}', '${p_nombre}') as empleado_turno_id_actualizado`
       );
       return {'se actualizo el turno del empleado': result.rows[0]}
     } catch (error) {
-      throw new Error('Error al actualizar empleado: ' + error.message);
+      throw new Error('Error al actualizar turno: ' + error.message);
     }
   }
   async deleteEmpleadoTurno(p_empleadoTurno_id) {

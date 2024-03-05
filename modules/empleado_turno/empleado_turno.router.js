@@ -16,7 +16,7 @@ router.get('/:empleadoId', async (req, res) => {
   })
 });
 
-router.patch('/:empleadoId', async (req, res) => {
+router.patch('/:p_turno_id', async (req, res) => {
   ActualizarTurnoPorIdEmpleado(req, res)
   .catch(error => {
     res.status(500).json({ message: error.message });

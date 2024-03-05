@@ -29,9 +29,9 @@ const obtenerturno = async(req, res) => {
 
 const ActualizarTurnoPorIdEmpleado = async (req, res) => {
   try {
-    const { empleadoId } = req.params;
+    const { p_turno_id } = req.params;
     const { Fecha = "1800-01-01", HoraEntrada = "00:00:00", HoraSalida = "00:00:00", Nombre= '' } = req.body;
-    const response = service.actualizarEmpleado(empleadoId, Fecha, HoraEntrada, HoraSalida, Nombre);
+    const response = service.actualizarEmpleado(p_turno_id, Fecha, HoraEntrada, HoraSalida, Nombre);
     res.status(200).send(response);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -31,9 +31,9 @@ class Empleado_TurnoService extends empleadoTurnoDB {
     }
   }
 
-  async actualizarEmpleado(p_empleado_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre) {
+  async actualizarEmpleado(p_turno_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre) {
     try {
-      const response = super.actualizarEmpleado(p_empleado_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre)
+      const response = super.actualizarEmpleado(p_turno_id, p_fecha, p_hora_entrada, p_hora_salida, p_nombre)
       return response
     } catch (error) {
       throw new Error('Error al actualizar empleado: ' + error.message);
